@@ -11,7 +11,7 @@ def read_data():
     return data
 
 data = read_data()
-st.title('Welcome to SMC Branson.')
+st.title('Welcome to SMC Branson!')
 st.subheader('Thank you for volunteering please select your name below')
 volunteer = st.selectbox('Volunteer Name', options=data.index)
 
