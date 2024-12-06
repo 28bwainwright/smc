@@ -5,7 +5,7 @@ st.set_page_config('SMC Branson Volunteer Schedule Builder', layout='centered')
 st.html(r'styles.html')
 
 
-data = pd.read_excel(r'db/SMC Volunteer Schedule 2024.xlsx', sheet_name='Volunteer Schedule')
+data = pd.read_excel(r'SMC Volunteer Schedule 2024.xlsx', sheet_name='Volunteer Schedule')
 
 data = data.set_index(keys='NAME')
 # data = data.T
