@@ -4,26 +4,20 @@ import pandas as pd
 st.set_page_config('SMC Branson Volunteer Schedule Builder', layout='centered')
 st.html(r'styles.html')
 
+@st.cache_data(ttl=3600)
+def read_data():
+    data = pd.read_excel(r'SMC Volunteer Schedule 2024.xlsx', sheet_name='Volunteer Schedule')
+    data = data.set_index(keys='NAME')
+    return data
 
-data = pd.read_excel(r'SMC Volunteer Schedule 2024.xlsx', sheet_name='Volunteer Schedule')
-
-data = data.set_index(keys='NAME')
-# data = data.T
-
-# st.dataframe(data, use_container_width=True)
-
-
+data = read_data()
+st.title('Welcome to SMC Branson.')
+st.subheader('Thank you for volunteering please select your name below')
 volunteer = st.selectbox('Volunteer Name', options=data.index)
-
-# st.write(data.columns)
 
 view = data.loc[volunteer]
 view = view.dropna()
-
 view.to_dict()
-# st.dataframe(view, use_container_width=True)
-
-
 
 for key, value in view.to_dict().items():
 
