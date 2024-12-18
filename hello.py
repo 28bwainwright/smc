@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from streamlit_gsheets import GSheetsConnection
 
 st.set_page_config('SMC Branson Volunteer Schedule Builder', layout='centered')
 st.html(r'styles.html')
@@ -13,8 +14,11 @@ def read_data():
 data = read_data()
 st.title('Welcome to SMC Branson!')
 st.subheader('Thank you for volunteering please select your name below')
-volunteer = st.selectbox('Volunteer Name', options=data.index)
 
+
+tabs = st.tabs(['Schedule', 'Check In', 'Night Light', 'Breakout Rooms', 'Store'])
+
+volunteer = st.selectbox('Volunteer Name', options=data.index)
 view = data.loc[volunteer]
 view = view.dropna()
 view.to_dict()
