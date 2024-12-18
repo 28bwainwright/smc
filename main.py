@@ -1,6 +1,7 @@
 import streamlit as st
 from pathlib import Path
 
+st.set_page_config('SMC 2025 Volunteers', page_icon='smc_logo.png')
 st.html('styles.html')
 st.image('smc_main.png', use_container_width=True)
 st.html('<h4>Thank you for volunteering at SMC!</h4>')
