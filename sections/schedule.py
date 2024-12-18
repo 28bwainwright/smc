@@ -1,3 +1,3 @@
 import streamlit as st
 
-st.container().image('smc_map.png')
+st.container().image('smc_schedule.png')

@@ -15,7 +15,7 @@ map_page = st.Page(
 
 schedule_page = st.Page(
     page=Path.cwd().joinpath('sections').joinpath('schedule.py'),
-    title='SMC',
+    title='Full Schedule',
     icon=":material/event_upcoming:"
     )
 
