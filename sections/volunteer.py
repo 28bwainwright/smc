@@ -5,8 +5,12 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 
 view_all, jan2, jan3, jan4, jan5 = st.tabs(['All Days', 'January 2nd', 'January 3rd', 'January 4th', 'January 5th'])
 
-with jan2:
+with view_all:
     data = conn.read(worksheet=0)
+    st.dataframe(data)
+
+with jan2:
+    data = conn.read(worksheet=1)
     st.dataframe(data)
 
 with jan3:
