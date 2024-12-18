@@ -12,6 +12,8 @@ def read_data():
     return data
 
 data = read_data()
+
+## LOGO
 st.title('Welcome to SMC Branson!')
 
 

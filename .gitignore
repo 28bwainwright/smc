@@ -1,3 +1,7 @@
+# streamlit secrets
+secrets.toml
+smc-2025-70d9d7b73edb.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
