@@ -1,36 +1,32 @@
 import streamlit as st
-import pandas as pd
+from pathlib import Path
 
+st.html('styles.html')
+st.image('smc_main.png', use_container_width=True)
+st.html('<h4>Thank you for volunteering at SMC!</h4>')
 
-st.set_page_config('SMC Branson Volunteer Schedule Builder', layout='centered')
-st.html(r'styles.html')
+map_page = st.Page(
+    page=Path.cwd().joinpath('sections').joinpath('map.py'),
+    title='Map of SMC',
+    icon=":material/map:"
+    )
 
-@st.cache_data(ttl=3600)
-def read_data():
-    data = pd.read_excel(r'SMC Volunteer Schedule 2024.xlsx', sheet_name='Volunteer Schedule')
-    data = data.set_index(keys='NAME')
-    return data
+schedule_page = st.Page(
+    page=Path.cwd().joinpath('sections').joinpath('schedule.py'),
+    title='SMC',
+    icon=":material/event_upcoming:"
+    )
 
-data = read_data()
+volunteer_page = st.Page(
+    page=Path.cwd().joinpath('sections').joinpath('volunteer.py'),
+    title='Volunteer', 
+    default=True,
+    icon=':material/groups:'
+    )
 
-## LOGO
-st.title('Welcome to SMC Branson!')
+pages = {
+    'SMC Volunteer App': [volunteer_page, schedule_page, map_page],
+}
 
-
-
-tabs = st.tabs(['Volunteer', 'Wristbands','Check In', 'Night Life', 'Breakout Assistant', 'Encounter Assistant', 'SMC Store'])
-
-with tabs[0]:
-    st.subheader('Thank you for volunteering please select your name below')
-    volunteer = st.selectbox('Volunteer Name', options=data.index)
-    view = data.loc[volunteer]
-    view = view.dropna()
-    view.to_dict()
-
-    for key, value in view.to_dict().items():
-
-        with st.container(border=True):
-        
-            st.html(f"<h4>{key}</h4>")
-            st.write(value)
-
+pg = st.navigation(pages=pages)
+pg.run()
