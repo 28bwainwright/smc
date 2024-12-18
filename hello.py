@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from streamlit_gsheets import GSheetsConnection
+
 
 st.set_page_config('SMC Branson Volunteer Schedule Builder', layout='centered')
 st.html(r'styles.html')
