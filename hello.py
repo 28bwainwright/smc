@@ -13,23 +13,22 @@ def read_data():
 
 data = read_data()
 st.title('Welcome to SMC Branson!')
-st.subheader('Thank you for volunteering please select your name below')
 
 
-tabs = st.tabs(['Schedule', 'Check In', 'Night Light', 'Breakout Rooms', 'Store'])
 
-volunteer = st.selectbox('Volunteer Name', options=data.index)
-view = data.loc[volunteer]
-view = view.dropna()
-view.to_dict()
+tabs = st.tabs(['Volunteer', 'Wristbands','Check In', 'Night Life', 'Breakout Assistant', 'Encounter Assistant', 'SMC Store'])
 
-for key, value in view.to_dict().items():
+with tabs[0]:
+    st.subheader('Thank you for volunteering please select your name below')
+    volunteer = st.selectbox('Volunteer Name', options=data.index)
+    view = data.loc[volunteer]
+    view = view.dropna()
+    view.to_dict()
 
-    with st.container(border=True):
-        cols = st.columns(2)
-        with cols[0]:
+    for key, value in view.to_dict().items():
+
+        with st.container(border=True):
+        
             st.html(f"<h4>{key}</h4>")
-
-        with cols[1]:
             st.write(value)
 
