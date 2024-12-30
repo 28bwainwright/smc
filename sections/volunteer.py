@@ -6,8 +6,8 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 
 
 def make_full_name(df: pd.DataFrame) -> pd.DataFrame:
-    df['FULL NAME'] = df['FIRST NAME'] + ' ' + df['LAST NAME'] 
-    df['FULL NAME'] = df['FULL NAME'].str.strip()
+    df['FULL NAME'] = df['FIRST NAME'].str.strip() + ' ' + df['LAST NAME'].str.strip() 
+    df['FULL NAME'] = df['FULL NAME']
     df = df.drop(labels=['FIRST NAME', 'LAST NAME'], axis=1)
     return df.set_index('FULL NAME')
 
@@ -61,11 +61,13 @@ with jan3:
 with jan4:
     df = conn.read(worksheet=4)
     df = make_full_name(df=df)
+    # st.write(df)
     display_volunteer_roles(df=df, date='January 4th', volunteer=volunteer)
 
 with jan5:
     df = conn.read(worksheet=5)
     df = make_full_name(df=df)
+    # st.write(df)
     display_volunteer_roles(df=df, date='January 5th', volunteer=volunteer)
 
 
