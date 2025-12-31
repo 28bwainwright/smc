@@ -47,7 +47,7 @@
 # future.
 
 # Default: true
-# showErrorDetails = true
+showErrorDetails = false
 
 # Change the visibility of items in the toolbar, options menu,
 # and settings dialog (top right of the app).
@@ -63,7 +63,7 @@
 # If there are no options left, hide the menu.
 
 # Default: "auto"
-# toolbarMode = "auto"
+toolbarMode = "viewer"
 
 # Controls whether to display the default sidebar page navigation in a
 # multi-page app. This only applies when app's pages are defined by the
@@ -286,9 +286,12 @@ runOnSave = true
 
 
 base="light"
-secondaryBackgroundColor="#becad7"
+primaryColor = "#058447"
+secondaryBackgroundColor="#EBD7B8"
 textColor="#000000"
-
+# #005D34
+# #058447
+# #EBD7B8
 
 
 [secrets]
