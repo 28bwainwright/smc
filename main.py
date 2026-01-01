@@ -63,7 +63,13 @@ class Main:
         with st.container(border=True):
 
             volunteers = self.get_data_from_sheet(day=1)
-            volunteer: str | None = st.selectbox(label='Volunteer Name', index=None, options=volunteers.select('full name').unique().sort(by='full name'), placeholder='Select a name to view volunteer schedule')
+            volunteer: str | None = st.selectbox(
+                label='Volunteer Name', 
+                index=None, 
+                options=volunteers.select('full name').sort(by='full name').unique(maintain_order=True), 
+                placeholder='Select a name to view volunteer schedule',
+                key='volunteer'
+            )
             if volunteer is None:
                 st.warning('Please select a volunteer to view the schedule')
                 st.stop()
@@ -73,7 +79,7 @@ class Main:
 
             for tab, day in zip(tabs, days):
                 with tab:
-                    df = self.get_data_from_sheet(day=days.get(day, 2))
+                    df = self.get_data_from_sheet(day=days.get(day, 2))       
                     df = (
                         df
                         .filter(pl.col('full name')==volunteer)
@@ -92,10 +98,11 @@ class Main:
     
     def get_data_from_sheet(self, day: int) -> pl.DataFrame:
         full_name = pl.concat_str(cs.contains('first name').str.strip_chars(), cs.contains('last name').str.strip_chars(), separator=' ').alias('full name')
+        df = pl.from_pandas(self.conn.read(worksheet=day, ttl=60*30))
         return (
-            pl.from_pandas(self.conn.read(worksheet=day))
+            df
             .rename(lambda x: x.lower())
-            .with_columns(full_name,)
+            .with_columns(full_name)
             )
 
     def display_schedule(self, df: pl.DataFrame, volunteer: str, day: str) -> None: 
